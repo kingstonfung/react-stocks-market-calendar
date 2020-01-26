@@ -1,0 +1,30 @@
+@import 'styles/common.scss';
+
+.inputWrapper {
+  display: flex;
+
+  .tickerInput {
+    font-size: 20px;
+    margin-right: 20px;
+    width: 100%;
+  
+    label {
+      font-size: 20px;
+    }
+  
+    legend {
+      span {
+        padding: 0 42px;
+      }
+    }
+  
+    input {
+      text-transform: uppercase;
+      font-size: 20px;
+    }
+  }
+
+  .searchButton {
+    font-size: 14px !important;
+  }
+}

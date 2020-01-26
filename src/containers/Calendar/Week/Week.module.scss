@@ -1,0 +1,12 @@
+@import 'styles/common.scss';
+
+.week {
+  @include row;
+
+  border-top: solid 1px $borderColor;
+  height: 75px;
+
+  &:first-child {
+    border-top: none;
+  }
+}

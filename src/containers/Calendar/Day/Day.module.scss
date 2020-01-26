@@ -1,0 +1,47 @@
+@import 'styles/common.scss';
+
+.day {
+  @include vertical-center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 75px;
+  border-left: solid 1px $borderColor;
+  cursor: pointer;
+  transition: all 0.5s;
+
+  &:hover {
+    background: $ltGrey;
+  }
+
+  &:first-child {
+    border-left:none;
+  }
+
+  &.today {
+    background: $ltSecondary;
+  }
+
+  &.differentMonth {
+    color: $mdGrey;
+
+    .symbol {
+      border: 1px solid rgba(0, 128, 0, 0.5);
+    }
+  }
+
+  &.selected {
+    background: $secondary;
+    color: $white;
+
+    .symbol {
+      border: 1px solid white;
+    }
+  }
+
+  .symbolsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -20px;
+  }
+}

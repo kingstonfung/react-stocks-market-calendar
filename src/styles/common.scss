@@ -1,0 +1,20 @@
+@mixin vertical-center {
+  display: flex;
+  justify-content:center;
+  align-items: center;  
+}
+
+@mixin row {
+  display: flex;
+  width: 100%;
+}
+
+$white: #FFFFFF;
+$ltGrey: #EFEFEF;
+$mdGrey: #C0C0C0;
+$dkGrey: #CCCCCC;
+$secondary:#3f51b5;
+$dkSecondary: darken($secondary,10%);
+$ltSecondary: lighten($secondary,45%);
+$borderColor: $dkGrey;
+$background: $white;

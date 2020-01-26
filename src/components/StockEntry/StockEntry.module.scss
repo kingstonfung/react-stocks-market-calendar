@@ -1,0 +1,74 @@
+@import 'styles/common.scss';
+
+.stockEntry {
+  align-items: center;
+  border: 1px solid $secondary;
+  border-radius: 5px;
+  display: flex;
+  padding: 10px;
+  height: 30px;
+  margin-bottom: 20px;
+  width: calc(100% - 20px);
+
+  .symbol {
+    color: #3f51b5;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px;
+    min-width: 70px;
+  }
+
+  .name {
+    flex-grow: 2;
+    font-size: 20px;
+  }
+
+  .price {
+    color: #3f51b5;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px;
+  }
+
+  .earningsCallDateWrapper {
+    border-left: 1px solid #3f51b5;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    padding: 0 10px 0 20px;
+
+    .earningsCallDate {
+      font-weight: 800;
+    }
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .stockEntry {
+    padding: 5px;
+
+    .symbol {
+      font-size: 12px;
+      min-width: 35px;
+      margin-right: 5px;
+    }
+
+    .name {
+      flex-grow: 2;
+      font-size: 10px;
+    }
+
+    .price {
+      font-size: 12px;
+      margin-right: 5px;
+    }
+
+    .earningsCallDateWrapper {
+      font-size: 10px;
+      padding: 0 0 0 5px;
+    }
+  }
+}

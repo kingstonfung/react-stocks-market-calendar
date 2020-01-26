@@ -1,0 +1,30 @@
+@import 'styles/common.scss';
+
+.wrapper {
+  @include row;
+
+  color: $secondary;
+  font-weight: bold;
+  cursor: default;
+  font-size: 1.2rem;
+
+  .day {
+    @include vertical-center;
+    flex: 1;
+    height: 70px;
+    border-left: solid 1px $borderColor;
+    cursor: pointer;
+    transition: all 0.5s;
+  
+    &:hover {
+      background: $ltGrey;
+    }
+  
+    &:first-child {
+      border-left:none;
+    }
+  }
+  
+}
+
+  
