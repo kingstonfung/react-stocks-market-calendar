@@ -26,5 +26,11 @@
 
   .searchButton {
     font-size: 14px !important;
+    min-width: 80px;
+
+    &.loading {
+      cursor: wait;
+      opacity: 0.5;
+    }
   }
 }

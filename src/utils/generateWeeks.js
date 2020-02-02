@@ -1,3 +1,8 @@
+/*
+  Similar to "generateDays.js", this utility function helps creating the weeks information
+  so it can let the view (Calendar.view.js) to render each row correctly.
+*/
+
 export default (month, selected, changeMonth) => {
   let weeks = [];
   let done = false;

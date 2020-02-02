@@ -1,3 +1,7 @@
+/*
+  This is the root component for the entire application.
+*/
+
 import React, { Component } from 'react';
 
 import UserInput from './components/UserInput';
@@ -7,23 +11,31 @@ import stocksTimingFilter from 'utils/stocksTimingFilter';
 import performStockLookup from 'utils/performStockLookup';
 
 class App extends Component {
-  componentDidMount() {
-    this.setState({
-      stocks: [
-        {"name":"Facebook, Inc.","price":217.94,"symbol":"FB","earningsDate":"2020-01-29T21:00:00.000Z"},
-        {"name":"Apple Inc.","price":318.31,"symbol":"AAPL","earningsDate":"2020-01-28T21:00:00.000Z"},
-        {"name":"Amazon.com, Inc.","price":1861.64,"symbol":"AMZN","earningsDate":"2020-01-30T21:00:00.000Z"},
-        {"name":"Netflix, Inc.","price":353.16,"symbol":"NFLX","earningsDate":"2020-01-21T16:00:03.000Z"},
-        {"name":"Alphabet Inc.","price":1466.17,"symbol":"GOOGL","earningsDate":"2020-02-03T21:00:00.000Z"}
-      ],
-      displayList: [],
-      selectedDay: null,
-      errorMessage: null,
-      lastEnteredValue: document.querySelector('#ticketsInput').value,
-    });
+  state = {
+    displayList: [],
+    stocks: [],
+    selectedDay: null,
+    errorMessage: null,
+    lastEnteredValue: '',
+    loading: true,
   }
 
-  state = { stocks: [] };
+  /*
+    componentDidMount is one of the React component lifecycles, that runs when the first "render"
+    is executed. Here we can set states, fetch data, and do other work that would alert the
+    application's state.
+  */
+  async componentDidMount() {
+    const stocks = await performStockLookup(document.querySelector('#ticketsInput').value);
+
+    /*
+      The following line will "pause" the function for 10 seconds before updating
+      the application state, it is useful to test our loading state during development.
+    */
+    // await new Promise(r => setTimeout(() => r(), 10000));
+
+    this.setState({ stocks, loading: false });
+  }
 
   onDaySelected(day = this.state.selectedDay) {
     if (this.state.stocks && this.state.stocks.length && day) {
@@ -32,26 +44,50 @@ class App extends Component {
     }
   }
 
+  /*
+    This method is triggered when the user clicks the SEARCH button (see UserInput.view.js) when
+    the application state is not loading.
+
+    We will immediately set the "loading" state to true so we can display the loading UI right
+    the way. Then, once all the data arrives, we will store the information to the state as well
+    as reversing the "loading" state (setting it to false) so the UI is cycled again for the next
+    user interaction.
+  */
   async onTickerSubmit() {
+    this.setState({ loading: true });
     const userEnteredValue = document.querySelector('#ticketsInput').value;
     if (userEnteredValue === this.state.lastEnteredValue) return;
 
     const stocks = await performStockLookup(userEnteredValue);
     if (stocks.error) {
-      this.setState({ errorMessage: stocks.message })
+      this.setState({ errorMessage: stocks.message, loading: false })
       return;
     }
     
-    this.setState({ stocks, error: false, errorMessage: null,  lastEnteredValue: userEnteredValue });
+    this.setState({
+      stocks, error: false,
+      errorMessage: null,
+      lastEnteredValue: userEnteredValue,
+      loading: false,
+    });
     this.onDaySelected();
   }
 
   render() {
     return (
       <>
-        <UserInput onTickerSubmit={this.onTickerSubmit.bind(this)} errorMessage={this.state.errorMessage} />
-        <Calendar stocks={this.state.stocks} daySelectionMade={this.onDaySelected.bind(this)} />
-        { this.state.displayList && this.state.displayList.map(visibleStocks => <StockEntry key={visibleStocks.symbol} {...visibleStocks} />)}
+        <UserInput
+          loading={this.state.loading}
+          onTickerSubmit={this.onTickerSubmit.bind(this)}
+          errorMessage={this.state.errorMessage}
+        />
+        <Calendar
+          stocks={this.state.stocks}
+          daySelectionMade={this.onDaySelected.bind(this)}
+        />
+        {this.state.displayList &&
+          this.state.displayList.map(visibleStocks => <StockEntry key={visibleStocks.symbol} {...visibleStocks} />)
+        }
       </>
     );
   }

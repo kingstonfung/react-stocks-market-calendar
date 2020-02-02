@@ -1,3 +1,8 @@
+/*
+  This utility function helps creating the data for each week, so the view (Weeks.view.js)
+  can use those information and render accordingly.
+*/
+
 export default (date, month) => {
   let days = [];
   for (let i = 0; i < 7; i++) {

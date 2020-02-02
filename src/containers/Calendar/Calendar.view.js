@@ -1,3 +1,17 @@
+/*
+  This is the core component to our Application. It is composed of many child (and sub children) components
+  in order to drive the view of the entire calendar.
+
+  As the App initializes, we immediately want to set the currnet date (today) and store it in the state.
+
+  The two props this component will receive from the root level "App" are:
+    a) daySelectionMade (function): As soon as the user clicks on any day, we want to trigger this function
+      to allow the App to determine if the selected day contains any companies that have earnings call.
+    b) stocks (array): This list is passed down from the root level (App), and we relay it deeper into the
+      child compponent (Week), which eventually be passed down to the Day component that renders the stock
+      ticker symbol.
+*/
+
 import React from 'react';
 import moment from 'moment';
 

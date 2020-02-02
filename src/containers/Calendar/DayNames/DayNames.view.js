@@ -1,3 +1,7 @@
+/*
+  This component is responsible to show the names for each day of the week.
+*/
+
 import React from 'react';
 
 import styles from './DayNames.module.scss';
