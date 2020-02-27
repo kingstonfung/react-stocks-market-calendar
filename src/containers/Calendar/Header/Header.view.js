@@ -29,6 +29,12 @@ import styles from './Header.module.scss';
 class Header extends React.Component {
   state = { month: this.props.month };
 
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      month: nextProps.month,
+    }
+  }
+
   previous() {
     const { month } = this.state;
 
