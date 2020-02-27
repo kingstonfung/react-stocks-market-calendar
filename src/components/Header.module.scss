@@ -1,0 +1,67 @@
+@import '../common.scss';
+
+.header {
+  @include vertical-center;
+
+  color: $white;
+  cursor: default;
+  font-size:1.4rem;
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  user-select: none; 
+}
+
+.monthDisplay {
+  @include row;
+
+  align-items: center;
+  height: 60px;
+  background: $secondary;
+}
+
+.monthLabel { 
+  flex: 1;
+  font-size: 2rem;
+  letter-spacing: 0.25rem;
+}
+
+.arrowWrapper {
+  display: flex;
+  width: calc(100% / 7);
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background: $dkSecondary;
+  }
+}
+
+.wrapper {
+  @include row;
+
+  color: $secondary;
+  font-weight: bold;
+  cursor: default;
+  font-size: 1.2rem;
+
+  .day {
+    @include vertical-center;
+    flex: 1;
+    height: 70px;
+    border-left: solid 1px $borderColor;
+    cursor: pointer;
+    transition: all 0.5s;
+  
+    &:hover {
+      background: $ltGrey;
+    }
+  
+    &:first-child {
+      border-left:none;
+    }
+  }
+  
+}

@@ -1,4 +1,4 @@
-@import 'styles/common.scss';
+@import '../common.scss';
 
 .day {
   @include vertical-center;
@@ -44,4 +44,15 @@
     flex-wrap: wrap;
     margin-top: -20px;
   }
+}
+
+.symbol {
+  display: block;
+  position: relative;
+  left: 0;
+  font-size: 9px;
+  border: 1px solid green;
+  border-radius: 5px;
+  padding: 2px;
+  margin: 2px;
 }

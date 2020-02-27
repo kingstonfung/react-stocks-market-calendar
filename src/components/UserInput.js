@@ -1,14 +1,3 @@
-/*
-  This component is responsible for the view of the input textfield and "Search" button.
-  
-  Notice the "defaultValue" here, because we have statically set the default stocks for this App,
-  we want to reflect that by assigning the default value here as well to indicate to the user
-  that this is what we have shown on first load.
-
-  Also take note of the onClick hander, we ONLY want to trigger the event (props.onTickerSubmit)
-  when it is not loading which is obtained from props, sent from the parent.
-*/
-
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';

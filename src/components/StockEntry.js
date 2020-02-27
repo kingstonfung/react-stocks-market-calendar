@@ -1,12 +1,7 @@
-/*
-  This "stateless" component is the view that shows the individual stock information when the day
-  of earnings call is selected.
-*/
-
 import React from 'react';
 import moment from 'moment';
 
-import formatCurrency from 'utils/formatCurrency';
+import formatCurrency from '../formatCurrency';
 import styles from './StockEntry.module.scss';
 
 export default (props) => (

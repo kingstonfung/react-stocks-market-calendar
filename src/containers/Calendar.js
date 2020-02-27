@@ -1,26 +1,35 @@
-/*
-  This is the core component to our Application. It is composed of many child (and sub children) components
-  in order to drive the view of the entire calendar.
-
-  As the App initializes, we immediately want to set the currnet date (today) and store it in the state.
-
-  The two props this component will receive from the root level "App" are:
-    a) daySelectionMade (function): As soon as the user clicks on any day, we want to trigger this function
-      to allow the App to determine if the selected day contains any companies that have earnings call.
-    b) stocks (array): This list is passed down from the root level (App), and we relay it deeper into the
-      child compponent (Week), which eventually be passed down to the Day component that renders the stock
-      ticker symbol.
-*/
-
 import React from 'react';
 import moment from 'moment';
 
-import Header from './Header';
-import Week from './Week';
-import generateWeeks from 'utils/generateWeeks';
-import stocksTimingFilter from 'utils/stocksTimingFilter';
+import Header from '../components/Header';
+import Week from '../components/Week';
+import stocksTimingFilter from '../stocksTimingFilter';
 
 import styles from './Calendar.module.scss';
+
+const generateWeeks = (month, selected, changeMonth) => {
+  let weeks = [];
+  let done = false;
+  let date = month.clone().startOf('month').add('w' -1).day('Sunday');
+  let count = 0;
+  let monthIndex = date.month();
+
+  while (!done) {
+    weeks.push({
+      date: date.clone(),
+      month,
+      select: day => changeMonth({ selected: day.date, month: day.date.clone() }),
+      selected,
+      stocks: [],
+    });
+
+    date.add(1, 'w');
+    done = count++ > 2 && monthIndex !== date.month();
+    monthIndex = date.month();
+  }
+
+  return weeks;
+};
 
 class Calendar extends React.Component {
   state = {
