@@ -13,7 +13,7 @@ class Header extends React.Component {
     }
   }
 
-  previous() {
+  previous = () => {
     const { month } = this.state;
 
     this.setState({
@@ -23,7 +23,7 @@ class Header extends React.Component {
     this.props.triggerMonthChange(month);
   }
 
-  next() {
+  next = () => {
     const { month } = this.state;
 
     this.setState({
@@ -41,7 +41,7 @@ class Header extends React.Component {
             <FontAwesomeIcon className={styles.arrow} icon={faAngleLeft} size="lg" />
           </div>
           <span className={styles.monthLabel}>{this.state.month.format("MMMM YYYY")}</span>
-          <div className={styles.arrowWrapper} onClick={this.previous}>
+          <div className={styles.arrowWrapper} onClick={this.next}>
             <FontAwesomeIcon className={styles.arrow} icon={faAngleLeft} size="lg" rotation={180} />
           </div>
         </div>
